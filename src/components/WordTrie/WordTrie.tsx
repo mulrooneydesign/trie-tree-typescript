@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+/** @jsxImportSource @emotion/react */
+import { useState } from 'react';
 import { Trie } from '../../trie-tree/trie';
-import { Input } from '../index';
+import { Input, Button } from '../index';
+import { css } from '@emotion/react';
+
+const wrapperStyles = css`
+  display: flex;
+  gap: 0.5rem;
+`;
 
 export default function WordTrie() {
   const [trie] = useState<Trie>(new Trie());
@@ -14,13 +21,15 @@ export default function WordTrie() {
   return (
     <div>
       <h1>Add a word to the dictionary</h1>
-      <Input
-        type="text"
-        placeholder="..add word here"
-        stateSetter={setWord}
-        value={word}
-      />
-      <button onClick={onClickHandler}>Add Word</button>
+      <div css={wrapperStyles}>
+        <Input
+          type="text"
+          placeholder="..add word here"
+          stateSetter={setWord}
+          value={word}
+        />
+        <Button onClickHandler={onClickHandler} text="Add Word" />
+      </div>
     </div>
   );
 }
