@@ -12,12 +12,12 @@ This is a small React/Typescript project using a trie as a data structure to hol
 
 ## Todo
 
-- store new words to a database
-- update database with new words added by user
+- Store new words to a database
+- Update database with new words added by user
 
 # Copyright
 
-Dictionary data file is borred from this github file: https://github.com/dwyl/english-words/blob/master/words.txt
+Dictionary data file is borrowed from this github file: https://github.com/dwyl/english-words/blob/master/words.txt
 Copyright information available here: https://github.com/dwyl/english-words/blob/master/
 
-This is not a commerical project.
+This is not a commercial project.

@@ -32,7 +32,11 @@ export default function CheckWord({ wordsTrie }: CheckWordProps) {
         onChangeCallback={setWord}
         value={word}
       />
-      {doesExist ? <p>{word} exists</p> : <p>{word} doesn't exist</p>}
+      {doesExist && word.length > 0 && word !== ' ' ? (
+        <p>{word} exists</p>
+      ) : (
+        <p>{word} doesn't exist</p>
+      )}
     </div>
   );
 }
