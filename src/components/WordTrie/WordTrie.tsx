@@ -21,7 +21,7 @@ export default function WordTrie() {
   useEffect(() => {
     async function fetchDictionary() {
       try {
-        const dict = await fetch('./data/dictionary.txt');
+        const dict = await fetch('/dictionary');
         if (dict.status === 200) {
           const text = await dict.text();
           const words = text.split('\r\n');
