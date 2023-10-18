@@ -21,7 +21,9 @@ export default function WordTrie() {
   useEffect(() => {
     async function fetchDictionary() {
       try {
-        const dict = await fetch('../../data/dictionary.txt');
+        const dict = await fetch(
+          'https://github.com/dwyl/english-words/blob/master/words.txt'
+        );
         if (dict.status === 200) {
           const text = await dict.text();
           const words = text.split('\r\n');
