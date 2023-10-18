@@ -1,5 +1,7 @@
 # Trie Tree Dictionary Lookup
 
+Demo: [https://trie-tree-typescript.netlify.app/](https://trie-tree-typescript.netlify.app/)
+
 This is a small React/Typescript project using a trie as a data structure to hold over 466k english dictionary words.
 
 ## Features
