@@ -1,16 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Trie } from '../../trie-tree/trie';
+import { Input } from '../index';
 
 export default function WordTrie() {
-  const [trie, setTrie] = useState<Trie>(new Trie());
-  const [hasWord, setHasWord] = useState<boolean>(false);
+  const [trie] = useState<Trie>(new Trie());
+  const [word, setWord] = useState<string>('');
 
-  useEffect(() => {
-    trie.addWord('hello');
-    setHasWord(trie.hasWord('hello'));
-  }, []);
+  function onClickHandler() {
+    trie.addWord(word);
+    setWord('');
+  }
 
   return (
-    <div className="WordTrie">Word that exists: {hasWord ? 'hello' : ''}</div>
+    <div>
+      <h1>Add a word to the dictionary</h1>
+      <Input
+        type="text"
+        placeholder="..add word here"
+        stateSetter={setWord}
+        value={word}
+      />
+      <button onClick={onClickHandler}>Add Word</button>
+    </div>
   );
 }
