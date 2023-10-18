@@ -13,11 +13,11 @@ export class Trie {
   }
 
   addLetter(letter: string) {
-    this.currentNode[letter] = { isWord: false };
+    this.currentNode[letter.toLowerCase()] = { isWord: false };
   }
 
   addWord(word: string) {
-    const letters = word.split('');
+    const letters = word.toLowerCase().split('');
 
     this.currentNode = this.root;
 
@@ -33,7 +33,7 @@ export class Trie {
   }
 
   hasWord(word: string) {
-    const letters = word.split('');
+    const letters = word.toLowerCase().split('');
 
     this.currentNode = this.root;
 
