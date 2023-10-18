@@ -1,6 +1,12 @@
-interface TrieNode {
+export interface TrieNode {
   [key: string]: TrieNode | boolean | undefined;
   isWord?: boolean;
+}
+
+export interface TrieType {
+  addLetter: (letter: string) => void;
+  addWord: (word: string) => void;
+  hasWord: (word: string) => boolean;
 }
 
 export class Trie {

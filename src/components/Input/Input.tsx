@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 interface InputProps {
   placeholder: string;
   type: HTMLInputTypeAttribute;
-  stateSetter: React.Dispatch<React.SetStateAction<string>>;
+  onChangeCallback: React.Dispatch<React.SetStateAction<string>>;
   value: string;
 }
 
@@ -33,7 +33,7 @@ const inputStyles = css`
 export default function Input({
   type,
   placeholder,
-  stateSetter,
+  onChangeCallback,
   value,
 }: InputProps) {
   return (
@@ -41,7 +41,7 @@ export default function Input({
       css={inputStyles}
       type={type}
       placeholder={placeholder}
-      onChange={(e) => stateSetter(e.target.value)}
+      onChange={(e) => onChangeCallback(e.target.value)}
       value={value}
     />
   );
