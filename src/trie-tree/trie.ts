@@ -1,9 +1,9 @@
 interface TrieNode {
-  [key: string]: TrieNode | boolean;
+  [key: string]: TrieNode | boolean | undefined;
   isWord?: boolean;
 }
 
-class Trie {
+export class Trie {
   private currentNode: TrieNode;
   private root: TrieNode;
 
@@ -55,9 +55,3 @@ class Trie {
     return false;
   }
 }
-
-const trie = new Trie();
-
-['hello', 'goodbye', 'goodness', 'gracious'].forEach((word) => {
-  trie.addWord(word);
-});
