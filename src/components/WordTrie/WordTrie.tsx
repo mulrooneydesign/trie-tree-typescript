@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Trie } from '../../trie-tree/trie';
 import { Input, Button, CheckWord } from '../index';
 import { css } from '@emotion/react';
@@ -17,6 +17,23 @@ export default function WordTrie() {
     trie.addWord(word);
     setWord('');
   }
+
+  useEffect(() => {
+    async function fetchDictionary() {
+      try {
+        const dict = await fetch('../../data/dictionary.txt');
+        if (dict.status === 200) {
+          const text = await dict.text();
+          const words = text.split('\r\n');
+          words.forEach((word) => trie.addWord(word));
+        }
+      } catch (e) {
+        console.error('Fetching dictionary error:', e);
+      }
+    }
+
+    fetchDictionary();
+  }, [trie]);
 
   return (
     <div>
@@ -36,6 +53,7 @@ export default function WordTrie() {
         <Button onClickHandler={onClickHandler} text="Add Word" />
       </div>
       <h2>Does the word exist?</h2>
+      <p>Type a word below to see if it exists in the dictionary.</p>
       <CheckWord wordsTrie={trie} />
     </div>
   );
