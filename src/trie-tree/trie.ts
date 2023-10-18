@@ -34,7 +34,6 @@ export class Trie {
 
   hasWord(word: string) {
     const letters = word.toLowerCase().split('');
-
     this.currentNode = this.root;
 
     let result: string = '';
@@ -48,7 +47,7 @@ export class Trie {
       }
     });
 
-    if (word === result && this.currentNode.isWord) {
+    if (word.toLowerCase() === result && this.currentNode.isWord) {
       return true;
     }
 
