@@ -25,3 +25,5 @@ dist-ssr
 
 # Local Todos
 todos.md
+# Local Netlify folder
+.netlify
