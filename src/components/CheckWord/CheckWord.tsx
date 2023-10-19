@@ -18,10 +18,18 @@ export default function CheckWord({ wordsTrie }: CheckWordProps) {
   const [word, setWord] = useState<string>('');
   const [doesExist, setDoesExist] = useState<boolean>(false);
   const [wordIsPrefix, setWordIsPrefix] = useState<boolean>(false);
+  const [potentialWords, setPotentialWords] = useState<string[]>(['']);
 
   useEffect(() => {
     const isPrefix = wordsTrie.isWordPrefix(word);
     setWordIsPrefix(isPrefix);
+
+    let potentials: string[] = [];
+
+    if (word.length > 3) {
+      potentials = wordsTrie.getPotentialWordsForPrefix(word);
+    }
+    setPotentialWords(potentials);
 
     const wordExists = wordsTrie.hasWord(word);
     setDoesExist(wordExists);
@@ -38,7 +46,12 @@ export default function CheckWord({ wordsTrie }: CheckWordProps) {
         />
       </div>
       <div>
-        <Message word={word} doesExist={doesExist} isPrefix={wordIsPrefix} />
+        <Message
+          word={word}
+          doesExist={doesExist}
+          isPrefix={wordIsPrefix}
+          potentialWords={potentialWords}
+        />
       </div>
     </>
   );
@@ -48,6 +61,7 @@ interface MessageProps {
   word: string;
   doesExist: boolean;
   isPrefix: boolean;
+  potentialWords: string[];
 }
 
 const messageDefault = css`
@@ -62,7 +76,11 @@ const messageFail = css`
   color: #ff0831c3;
 `;
 
-function Message({ word, doesExist, isPrefix }: MessageProps) {
+const potentialWordsStyles = css`
+  opacity: 0.5;
+`;
+
+function Message({ word, doesExist, isPrefix, potentialWords }: MessageProps) {
   const prefixMessage = () => {
     return isPrefix ? 'but it is the start of a word' : '';
   };
@@ -75,9 +93,17 @@ function Message({ word, doesExist, isPrefix }: MessageProps) {
         return <p css={messageDefault}>Type a word to start</p>;
       default:
         return (
-          <p css={messageFail}>
-            {word} doesn't exist {prefixMessage()}
-          </p>
+          <>
+            <p css={messageFail}>
+              {word} doesn't exist {prefixMessage()}
+            </p>
+            <div css={potentialWordsStyles}>
+              {potentialWords.length > 0 &&
+                potentialWords.sort().map((word) => {
+                  return <p key={word}>{word}</p>;
+                })}
+            </div>
+          </>
         );
     }
   };

@@ -8,6 +8,8 @@ export interface TrieType {
   addWord: (word: string) => void;
   hasWord: (word: string) => boolean;
   isWordPrefix: (word: string) => boolean;
+  getAllWords: (node: TrieNode, prefix: string) => string[];
+  getPotentialWordsForPrefix: (prefix: string) => string[];
 }
 
 export class Trie {
@@ -81,5 +83,45 @@ export class Trie {
     }
 
     return false;
+  }
+
+  getAllWords(node: TrieNode, prefix: string) {
+    let words: string[] = [];
+
+    if (node.isWord) {
+      words.push(prefix);
+    }
+
+    for (const letter in node) {
+      if (letter !== 'isWord') {
+        words = words.concat(
+          this.getAllWords(node[letter] as TrieNode, prefix + letter)
+        );
+      }
+    }
+
+    return words;
+  }
+
+  getPotentialWordsForPrefix(prefix: string) {
+    const letters = prefix.toLowerCase().split('');
+    this.currentNode = this.root;
+
+    let result: string = '';
+
+    letters.forEach((letter) => {
+      if (this.currentNode[letter]) {
+        result += letter;
+        this.currentNode = this.currentNode[letter] as TrieNode;
+      } else {
+        return false;
+      }
+    });
+
+    if (prefix.toLowerCase() === result) {
+      return this.getAllWords(this.currentNode, prefix);
+    }
+
+    return [];
   }
 }
