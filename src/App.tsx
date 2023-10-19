@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 
 const appStyles = css`
   display: flex;
+  flex-direction: column;
   color: white;
   background: #2e2e2e;
   padding: 1rem;

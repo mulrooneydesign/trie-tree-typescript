@@ -37,7 +37,7 @@ export default function WordTrie() {
     }
 
     fetchDictionary();
-  }, [trie]);
+  }, [hasDictionary, trie]);
 
   return (
     <div>
@@ -47,6 +47,10 @@ export default function WordTrie() {
         dictionary. There are easier ways to do what this does but they are not
         always as efficient as a trie will be for this use case.
       </p>
+      <h2>Does the word exist?</h2>
+      <p>Type a word below to see if it exists in the dictionary.</p>
+      <CheckWord wordsTrie={trie} />
+      <h2>Add a word that doesn't exist</h2>
       <div css={wrapperStyles}>
         <Input
           type="text"
@@ -54,11 +58,8 @@ export default function WordTrie() {
           onChangeCallback={setWord}
           value={word}
         />
-        <Button onClickHandler={onClickHandler} text="Add" />
+        <Button onClickHandler={onClickHandler} text="Add Word" />
       </div>
-      <h2>Does the word exist?</h2>
-      <p>Type a word below to see if it exists in the dictionary.</p>
-      <CheckWord wordsTrie={trie} />
     </div>
   );
 }
