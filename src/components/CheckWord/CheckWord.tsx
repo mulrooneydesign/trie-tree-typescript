@@ -88,7 +88,12 @@ function Message({ word, doesExist, isPrefix, potentialWords }: MessageProps) {
   const display = (word: string) => {
     switch (true) {
       case doesExist && word.length > 0 && word !== ' ':
-        return <p css={messageSuccess}>{word} exists in the dictionary</p>;
+        return (
+          <>
+            <p css={messageSuccess}>{word} exists in the dictionary</p>
+            <PotentialWords potentialWords={potentialWords} />
+          </>
+        );
       case word === '':
         return <p css={messageDefault}>Type a word to start</p>;
       default:
@@ -97,16 +102,22 @@ function Message({ word, doesExist, isPrefix, potentialWords }: MessageProps) {
             <p css={messageFail}>
               {word} doesn't exist {prefixMessage()}
             </p>
-            <div css={potentialWordsStyles}>
-              {potentialWords.length > 0 &&
-                potentialWords.sort().map((word) => {
-                  return <p key={word}>{word}</p>;
-                })}
-            </div>
+            <PotentialWords potentialWords={potentialWords} />
           </>
         );
     }
   };
 
   return <div>{display(word)}</div>;
+}
+
+function PotentialWords({ potentialWords }: { potentialWords: string[] }) {
+  return (
+    <div css={potentialWordsStyles}>
+      {potentialWords.length > 1 &&
+        potentialWords.sort().map((word) => {
+          return <p key={word}>{word}</p>;
+        })}
+    </div>
+  );
 }

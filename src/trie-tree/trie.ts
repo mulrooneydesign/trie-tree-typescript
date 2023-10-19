@@ -78,7 +78,7 @@ export class Trie {
       }
     });
 
-    if (word.toLowerCase() === result && !this.hasWord(word)) {
+    if (word.toLowerCase() === result) {
       return true;
     }
 
