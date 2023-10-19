@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from 'react';
-import { Input } from '../index';
+import { Input, WordTrie } from '../index';
 import { css } from '@emotion/react';
 
 import type { TrieType } from '../../trie-tree/trie';
@@ -19,6 +19,7 @@ export default function CheckWord({ wordsTrie }: CheckWordProps) {
   const [doesExist, setDoesExist] = useState<boolean>(false);
 
   const wordExists = wordsTrie.hasWord(word);
+  const isPrefix = wordsTrie.isWordPrefix(word);
 
   useEffect(() => {
     setDoesExist(wordExists);
@@ -35,7 +36,7 @@ export default function CheckWord({ wordsTrie }: CheckWordProps) {
         />
       </div>
       <div>
-        <Message word={word} doesExist={doesExist} />
+        <Message word={word} doesExist={doesExist} isPrefix={isPrefix} />
       </div>
     </>
   );
@@ -44,6 +45,7 @@ export default function CheckWord({ wordsTrie }: CheckWordProps) {
 interface MessageProps {
   word: string;
   doesExist: boolean;
+  isPrefix: boolean;
 }
 
 const messageDefault = css`
@@ -58,15 +60,27 @@ const messageFail = css`
   color: #ff0831c3;
 `;
 
-function Message({ word, doesExist }: MessageProps) {
+function Message({ word, doesExist, isPrefix }: MessageProps) {
+  const prefix = () => {
+    return isPrefix ? ' but it is the start of a word' : '';
+  };
+
   const display = (word: string) => {
     switch (true) {
       case doesExist && word.length > 0 && word !== ' ':
-        return <p css={messageSuccess}>{word} exists in the dictionary</p>;
+        return (
+          <p css={messageSuccess}>
+            {word} exists in the dictionary {prefix()}
+          </p>
+        );
       case word === '':
-        return <p css={messageDefault}>Type a word to start</p>;
+        return <p css={messageDefault}>Type a word to start {prefix()}</p>;
       default:
-        return <p css={messageFail}>{word} doesn't exist</p>;
+        return (
+          <p css={messageFail}>
+            {word} doesn't exist{prefix()}
+          </p>
+        );
     }
   };
 

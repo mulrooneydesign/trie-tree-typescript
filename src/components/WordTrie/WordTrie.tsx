@@ -9,6 +9,10 @@ const wrapperStyles = css`
   gap: 0.5rem;
 `;
 
+const noteStyles = css`
+  opacity: 0.5;
+`;
+
 export default function WordTrie() {
   const [trie] = useState<Trie>(new Trie());
   const [word, setWord] = useState<string>('');
@@ -60,6 +64,10 @@ export default function WordTrie() {
         />
         <Button onClickHandler={onClickHandler} text="Add Word" />
       </div>
+      <p css={noteStyles}>
+        Note: the current dictionary contains acronyms and other non-words. Need
+        to find a better source.
+      </p>
     </div>
   );
 }

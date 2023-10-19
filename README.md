@@ -14,6 +14,7 @@ This is a small React/Typescript project using a trie as a data structure to hol
 
 - Store new words to a database
 - Update database with new words added by user
+- Find a better dictionary
 
 # Copyright
 

@@ -7,6 +7,7 @@ export interface TrieType {
   addLetter: (letter: string) => void;
   addWord: (word: string) => void;
   hasWord: (word: string) => boolean;
+  isWordPrefix: (word: string) => boolean;
 }
 
 export class Trie {
@@ -54,6 +55,28 @@ export class Trie {
     });
 
     if (word.toLowerCase() === result && this.currentNode.isWord) {
+      return true;
+    }
+
+    return false;
+  }
+
+  isWordPrefix(word: string) {
+    const letters = word.toLowerCase().split('');
+    this.currentNode = this.root;
+
+    let result: string = '';
+
+    letters.forEach((letter) => {
+      if (this.currentNode[letter]) {
+        result += letter;
+        this.currentNode = this.currentNode[letter] as TrieNode;
+      } else {
+        return false;
+      }
+    });
+
+    if (word.toLowerCase() === result && !this.hasWord(word)) {
       return true;
     }
 
