@@ -8,22 +8,37 @@ interface ButtonProps {
 
 const buttonStyles = css`
   appearance: none;
-  border-color: grey;
+  border-color: #ff0062;
   border-radius: 0.25rem;
   border-style: solid;
   border-style: solid;
   border-width: 2px;
   box-sizing: border-box;
-  color: grey;
+  color: white;
+  background: #ff0062;
   font-size: 1.235rem;
   height: 3rem;
-  min-width: 3rem;
   outline: 0;
   padding-inline: 1rem;
   position: relative;
+  min-width: fit-content;
 
   ::placeholder {
     opacity: 1;
+  }
+
+  :hover {
+    color: white;
+    background: #800132;
+    border-color: #800132;
+    cursor: pointer;
+  }
+
+  :active {
+    color: white;
+    background: #ff0062;
+    border-color: #ff0062;
+    filter: drop-shadow(0px 0px 10px #ff0062);
   }
 `;
 

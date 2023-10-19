@@ -24,9 +24,18 @@ const inputStyles = css`
   outline: 0;
   padding-inline: 1rem;
   position: relative;
+  flex: 1;
+  max-width: 100%;
 
   ::placeholder {
     opacity: 0.5;
+  }
+
+  :focus {
+    border-color: #ffffff;
+    outline: 2px solid #00fffb;
+    filter: drop-shadow(0px 0px 3px #009dff);
+    color: #1b1b1b;
   }
 `;
 

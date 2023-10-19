@@ -54,7 +54,7 @@ export default function WordTrie() {
           onChangeCallback={setWord}
           value={word}
         />
-        <Button onClickHandler={onClickHandler} text="Add Word" />
+        <Button onClickHandler={onClickHandler} text="Add" />
       </div>
       <h2>Does the word exist?</h2>
       <p>Type a word below to see if it exists in the dictionary.</p>
