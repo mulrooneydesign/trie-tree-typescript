@@ -50,7 +50,7 @@ export default function Input({
       css={inputStyles}
       type={type}
       placeholder={placeholder}
-      onChange={(e) => onChangeCallback(e.target.value)}
+      onChange={(e) => onChangeCallback(e.target.value.trim())}
       value={value}
     />
   );

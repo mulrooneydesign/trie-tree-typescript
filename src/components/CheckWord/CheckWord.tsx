@@ -17,13 +17,15 @@ interface CheckWordProps {
 export default function CheckWord({ wordsTrie }: CheckWordProps) {
   const [word, setWord] = useState<string>('');
   const [doesExist, setDoesExist] = useState<boolean>(false);
-
-  const wordExists = wordsTrie.hasWord(word);
-  const isPrefix = wordsTrie.isWordPrefix(word);
+  const [wordIsPrefix, setWordIsPrefix] = useState<boolean>(false);
 
   useEffect(() => {
+    const isPrefix = wordsTrie.isWordPrefix(word);
+    setWordIsPrefix(isPrefix);
+
+    const wordExists = wordsTrie.hasWord(word);
     setDoesExist(wordExists);
-  }, [word, wordExists]);
+  }, [word, wordsTrie]);
 
   return (
     <>
@@ -36,7 +38,7 @@ export default function CheckWord({ wordsTrie }: CheckWordProps) {
         />
       </div>
       <div>
-        <Message word={word} doesExist={doesExist} isPrefix={isPrefix} />
+        <Message word={word} doesExist={doesExist} isPrefix={wordIsPrefix} />
       </div>
     </>
   );
@@ -61,7 +63,7 @@ const messageFail = css`
 `;
 
 function Message({ word, doesExist, isPrefix }: MessageProps) {
-  const prefix = () => {
+  const prefixMessage = () => {
     return isPrefix ? 'but it is the start of a word' : '';
   };
 
@@ -74,7 +76,7 @@ function Message({ word, doesExist, isPrefix }: MessageProps) {
       default:
         return (
           <p css={messageFail}>
-            {word} doesn't exist {prefix()}
+            {word} doesn't exist {prefixMessage()}
           </p>
         );
     }
