@@ -12,6 +12,7 @@ const wrapperStyles = css`
 export default function WordTrie() {
   const [trie] = useState<Trie>(new Trie());
   const [word, setWord] = useState<string>('');
+  const [hasDictionary, setHasDictionary] = useState<boolean>(false);
 
   function onClickHandler() {
     trie.addWord(word);
@@ -20,12 +21,15 @@ export default function WordTrie() {
 
   useEffect(() => {
     async function fetchDictionary() {
+      if (hasDictionary) return;
+
       try {
         const dict = await fetch('/dictionary.txt');
         if (dict.status === 200) {
           const text = await dict.text();
           const words = text.split('\r\n');
           words.forEach((word) => trie.addWord(word));
+          setHasDictionary(true);
         }
       } catch (e) {
         console.error('Fetching dictionary error:', e);
