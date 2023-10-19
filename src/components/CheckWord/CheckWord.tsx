@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from 'react';
-import { Input, WordTrie } from '../index';
+import { Input } from '../index';
 import { css } from '@emotion/react';
 
 import type { TrieType } from '../../trie-tree/trie';
