@@ -62,23 +62,19 @@ const messageFail = css`
 
 function Message({ word, doesExist, isPrefix }: MessageProps) {
   const prefix = () => {
-    return isPrefix ? ' but it is the start of a word' : '';
+    return isPrefix ? 'but it is the start of a word' : '';
   };
 
   const display = (word: string) => {
     switch (true) {
       case doesExist && word.length > 0 && word !== ' ':
-        return (
-          <p css={messageSuccess}>
-            {word} exists in the dictionary {prefix()}
-          </p>
-        );
+        return <p css={messageSuccess}>{word} exists in the dictionary</p>;
       case word === '':
-        return <p css={messageDefault}>Type a word to start {prefix()}</p>;
+        return <p css={messageDefault}>Type a word to start</p>;
       default:
         return (
           <p css={messageFail}>
-            {word} doesn't exist{prefix()}
+            {word} doesn't exist {prefix()}
           </p>
         );
     }
