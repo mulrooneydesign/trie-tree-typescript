@@ -22,7 +22,10 @@ export class Trie {
   }
 
   addLetter(letter: string) {
-    this.currentNode[letter.toLowerCase()] = { isWord: false };
+    const lowerCaseLetter = letter.toLowerCase();
+    if (!this.currentNode[lowerCaseLetter]) {
+      this.currentNode[lowerCaseLetter] = { isWord: false };
+    }
   }
 
   addWord(word: string) {
