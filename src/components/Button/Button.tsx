@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 interface ButtonProps {
   onClickHandler: () => void;
   text: string;
+  tabIndex: number;
 }
 
 const buttonStyles = css`
@@ -34,6 +35,10 @@ const buttonStyles = css`
     cursor: pointer;
   }
 
+  :focus {
+    outline: 2px solid #ff0062;
+  }
+
   :active {
     color: white;
     background: #ff0062;
@@ -42,9 +47,13 @@ const buttonStyles = css`
   }
 `;
 
-export default function Button({ onClickHandler, text }: ButtonProps) {
+export default function Button({
+  onClickHandler,
+  text,
+  tabIndex,
+}: ButtonProps) {
   return (
-    <button css={buttonStyles} onClick={onClickHandler}>
+    <button tabIndex={tabIndex} css={buttonStyles} onClick={onClickHandler}>
       {text}
     </button>
   );

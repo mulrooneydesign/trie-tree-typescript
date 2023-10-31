@@ -7,6 +7,7 @@ interface InputProps {
   type: HTMLInputTypeAttribute;
   onChangeCallback: React.Dispatch<React.SetStateAction<string>>;
   value: string;
+  tabIndex: number;
 }
 
 const inputStyles = css`
@@ -44,6 +45,7 @@ export default function Input({
   placeholder,
   onChangeCallback,
   value,
+  tabIndex,
 }: InputProps) {
   return (
     <input
@@ -52,6 +54,7 @@ export default function Input({
       placeholder={placeholder}
       onChange={(e) => onChangeCallback(e.target.value.trim())}
       value={value}
+      tabIndex={tabIndex}
     />
   );
 }

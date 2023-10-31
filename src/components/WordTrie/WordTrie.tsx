@@ -63,8 +63,9 @@ export default function WordTrie() {
           placeholder="add word here"
           onChangeCallback={setWord}
           value={word}
+          tabIndex={0}
         />
-        <Button onClickHandler={onClickHandler} text="Add Word" />
+        <Button tabIndex={0} onClickHandler={onClickHandler} text="Add Word" />
       </div>
       <p css={noteStyles}>
         Note: the current dictionary contains acronyms and other non-words. Need

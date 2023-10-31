@@ -43,6 +43,7 @@ export default function CheckWord({ wordsTrie }: CheckWordProps) {
           placeholder="word to check"
           onChangeCallback={setWord}
           value={word}
+          tabIndex={0}
         />
       </div>
       <div>
