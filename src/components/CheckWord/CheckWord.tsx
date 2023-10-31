@@ -91,7 +91,9 @@ function Message({ word, doesExist, isPrefix, potentialWords }: MessageProps) {
         return (
           <>
             <p css={messageSuccess}>{word} exists in the dictionary</p>
-            <PotentialWords potentialWords={potentialWords} />
+            {potentialWords.length > 1 && (
+              <PotentialWords potentialWords={potentialWords} />
+            )}
           </>
         );
       case word === '':
@@ -102,7 +104,7 @@ function Message({ word, doesExist, isPrefix, potentialWords }: MessageProps) {
             <p css={messageFail}>
               {word} doesn't exist {prefixMessage()}
             </p>
-            <PotentialWords potentialWords={potentialWords} />
+            {!doesExist && <PotentialWords potentialWords={potentialWords} />}
           </>
         );
     }
@@ -114,7 +116,7 @@ function Message({ word, doesExist, isPrefix, potentialWords }: MessageProps) {
 function PotentialWords({ potentialWords }: { potentialWords: string[] }) {
   return (
     <div css={potentialWordsStyles}>
-      {potentialWords.length > 1 &&
+      {potentialWords.length >= 1 &&
         potentialWords.sort().map((word) => {
           return <p key={word}>{word}</p>;
         })}
