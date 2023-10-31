@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Trie } from '../../trie-tree/trie';
 import { Input, Button, CheckWord } from '../index';
 import { css } from '@emotion/react';
@@ -14,13 +14,15 @@ const noteStyles = css`
 `;
 
 export default function WordTrie() {
-  const [trie] = useState<Trie>(new Trie());
+  const trie = useMemo(() => new Trie(), []);
   const [word, setWord] = useState<string>('');
   const [hasDictionary, setHasDictionary] = useState<boolean>(false);
 
   function onClickHandler() {
-    trie.addWord(word);
-    setWord('');
+    if (word !== '') {
+      trie.addWord(word);
+      setWord('');
+    }
   }
 
   useEffect(() => {
